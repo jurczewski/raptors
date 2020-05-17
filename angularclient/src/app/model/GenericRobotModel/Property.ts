@@ -29,7 +29,7 @@ export class Property {
     return this.type === PropertyTypeEnum.SIMPLE ? this.simpleValue : this.complexValue;
   }
 
-  isSimple(){
+  isComplex(){
     return this.type === PropertyTypeEnum.SIMPLE ? false : true;
   }
 }
