@@ -1,4 +1,4 @@
 <div>
-  <th>{{prop.name}}</th>
-  <td>{{prop.toString()}}</td>
+  <th [ngClass]="prop.isSimple() ? 'pointer' : ''">{{prop.name}}</th>
+  <td [ngClass]="prop.isSimple() ? 'link' : ''">{{prop.toString()}}</td>
 </div>
