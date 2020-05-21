@@ -14,10 +14,12 @@ export class ModelTableComponent implements OnInit, AfterViewChecked {
   private prevRoot: Property;
   header: string;
   properties;
+  public breadcrumbs: Array<Property> = [];
 
   constructor() { }
 
   ngOnInit() {
+    //this.breadcrumbs.push(this.root);
   }
 
   ngAfterViewChecked() {
@@ -25,14 +27,22 @@ export class ModelTableComponent implements OnInit, AfterViewChecked {
   }
 
   updateRoot(prop: Property): void {
+    this.breadcrumbs.push(prop);
+
     if (prop.type === PropertyTypeEnum.COMPLEX) {
       this.header = prop.name;
       this.properties = prop.getValue();
-    }
+    }  
   }
 
   goToRoot(): void {
     this.header = this.root.name;
     this.properties = this.root.getValue();
+  }
+
+  goToSelectedItem(prop: Property, i: number ): void{
+    const length = this.breadcrumbs.length;
+    this.breadcrumbs.splice(i, length);
+    this.updateRoot(prop);
   }
 }
