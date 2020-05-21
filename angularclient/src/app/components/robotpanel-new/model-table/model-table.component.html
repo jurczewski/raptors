@@ -1,6 +1,6 @@
 <div class="card-header">{{header}}</div>
 <h5>Navigation: </h5>
-<span *ngFor="let item of breadcrumbs; let i = index;" (click)="goToSelectedItem(item, i)" class="link"> >> {{item.name}} </span>
+<span *ngFor="let item of breadcrumbs; let i = index;" (click)="goToSelectedItem(item, i)"> >> <span class="link">{{item.name}}</span> </span>
 <table class="table">
   <tbody>
   <tr (click)="goToRoot()">
