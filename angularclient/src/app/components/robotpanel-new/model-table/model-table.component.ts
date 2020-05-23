@@ -16,10 +16,13 @@ export class ModelTableComponent {
   @Input()
   properties;
   private prevRoot: Property;
+  public breadcrumbs: Array<Property> = [];
 
   constructor() { }
 
   updateRoot(prop: Property): void {
+    this.breadcrumbs.push(prop);
+
     if (prop.type === PropertyTypeEnum.COMPLEX) {
       this.header = prop.name;
       this.properties = prop.getValue();
@@ -29,5 +32,11 @@ export class ModelTableComponent {
   goToRoot(): void {
     this.header = this.root.name;
     this.properties = this.root.getValue();
+  }
+
+  goToSelectedItem(prop: Property, i: number): void {
+    const length = this.breadcrumbs.length;
+    this.breadcrumbs.splice(i, length);
+    this.updateRoot(prop);
   }
 }
