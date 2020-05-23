@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, Input, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, Input, OnChanges, OnInit} from '@angular/core';
 import {Property} from "../../../model/GenericRobotModel/Property";
 import {PropertyTypeEnum} from "../../../model/GenericRobotModel/PropertyTypeEnum";
 
@@ -7,42 +7,27 @@ import {PropertyTypeEnum} from "../../../model/GenericRobotModel/PropertyTypeEnu
   templateUrl: './model-table.component.html',
   styleUrls: ['./model-table.component.css']
 })
-export class ModelTableComponent implements OnInit, AfterViewChecked {
+export class ModelTableComponent {
 
   @Input()
   root: Property;
-  private prevRoot: Property;
+  @Input()
   header: string;
+  @Input()
   properties;
-  public breadcrumbs: Array<Property> = [];
+  private prevRoot: Property;
 
   constructor() { }
 
-  ngOnInit() {
-    //this.breadcrumbs.push(this.root);
-  }
-
-  ngAfterViewChecked() {
-    this.goToRoot();
-  }
-
   updateRoot(prop: Property): void {
-    this.breadcrumbs.push(prop);
-
     if (prop.type === PropertyTypeEnum.COMPLEX) {
       this.header = prop.name;
       this.properties = prop.getValue();
-    }  
+    }
   }
 
   goToRoot(): void {
     this.header = this.root.name;
     this.properties = this.root.getValue();
-  }
-
-  goToSelectedItem(prop: Property, i: number ): void{
-    const length = this.breadcrumbs.length;
-    this.breadcrumbs.splice(i, length);
-    this.updateRoot(prop);
   }
 }
