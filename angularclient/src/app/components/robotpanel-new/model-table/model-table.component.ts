@@ -30,6 +30,7 @@ export class ModelTableComponent {
   }
 
   goToRoot(): void {
+    this.breadcrumbs = [];
     this.header = this.root.name;
     this.properties = this.root.getValue();
   }
