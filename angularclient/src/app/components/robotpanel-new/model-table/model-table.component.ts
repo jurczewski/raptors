@@ -21,7 +21,9 @@ export class ModelTableComponent {
   constructor() { }
 
   updateRoot(prop: Property): void {
-    this.breadcrumbs.push(prop);
+    if(prop.isComplex()){
+      this.breadcrumbs.push(prop);
+    }
 
     if (prop.type === PropertyTypeEnum.COMPLEX) {
       this.header = prop.name;
