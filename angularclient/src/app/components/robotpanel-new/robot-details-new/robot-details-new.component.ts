@@ -14,7 +14,7 @@ export class RobotDetailsComponentNew implements OnInit {
   @Output("refreshEvent")
   refreshEvent: EventEmitter<any> = new EventEmitter();
 
-  callParent() {
+  refresh() {
     this.refreshEvent.emit();
   }
 
