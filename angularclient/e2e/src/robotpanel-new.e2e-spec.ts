@@ -47,3 +47,30 @@ describe('robot status', () => {
         element(by.cssContainingText('button', 'refresh')).click();
     });
 });
+
+xdescribe('breadcrumbs', () => {
+    let page: AppPage;
+
+    beforeEach(() => {
+        page = new AppPage();
+    });
+
+    // wejdz w model >> batteryType i name field jest capacity
+    it('see more should return correct model', () => {
+        page.navigateToLocation('robotpanel-new/refreshtest');
+
+        const EC = protractor.ExpectedConditions;
+        browser.wait(EC.presenceOf(element(by.cssContainingText('th', 'robotIp'))), 20 * 1000, 'Element taking too long to appear in the DOM');
+        browser.waitForAngular();
+
+        // element(by.cssContainingText('th', 'robotIp')).getText().then((text) => {
+        //     console.log(text);
+        // });
+
+        expect(
+            element.all(by.cssContainingText('th', 'robotIp')).count()
+        ).toBeGreaterThanOrEqual(1);
+    });
+
+    // cofnij się do moduelu, jest field o nazwie maxVelocity
+});
