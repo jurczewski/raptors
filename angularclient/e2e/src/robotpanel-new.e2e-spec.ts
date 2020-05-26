@@ -18,3 +18,39 @@ describe('angularjs homepage todo list', function () {
         expect(completedAmount.count()).toEqual(2);
     });
 });
+
+describe('robot status', function () {
+    let page: AppPage;
+
+    beforeEach(() => {
+        page = new AppPage();
+    });
+
+    it('check robot status table contents', () => {
+        page.navigateToLocation('robotpanel-new/refreshtest');
+
+        expect(
+            element.all(by.cssContainingText('h3', 'Status robota')).count()
+        ).toEqual(1);
+
+        expect(
+            element.all(by.cssContainingText('th', 'Online')).count()
+        ).toEqual(1);
+
+        expect(
+            element.all(by.cssContainingText('th', 'IP')).count()
+        ).toEqual(1);
+
+        expect(
+            element.all(by.cssContainingText('th', 'Pozycja')).count()
+        ).toEqual(1);
+
+        expect(
+            element.all(by.cssContainingText('th', 'Orientacja')).count()
+        ).toEqual(1);
+
+        expect(
+            element.all(by.cssContainingText('th', 'Bateria')).count()
+        ).toEqual(1);
+    });
+});
