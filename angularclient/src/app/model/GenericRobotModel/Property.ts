@@ -30,6 +30,6 @@ export class Property {
   }
 
   isComplex(){
-    return this.type === PropertyTypeEnum.SIMPLE ? false : true;
+    return this.type === PropertyTypeEnum.COMPLEX ? false : true;
   }
 }
