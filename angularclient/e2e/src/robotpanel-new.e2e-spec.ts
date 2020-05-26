@@ -2,7 +2,7 @@ import { AppPage } from './app.po';
 import { browser, by, element } from 'protractor';
 import { protractor } from 'protractor/built/ptor';
 
-describe('robot status', function () {
+describe('robot status', () => {
     let page: AppPage;
 
     beforeEach(() => {
