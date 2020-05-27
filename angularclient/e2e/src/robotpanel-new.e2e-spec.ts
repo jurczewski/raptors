@@ -48,28 +48,40 @@ describe('robot status', () => {
     });
 });
 
-xdescribe('breadcrumbs', () => {
+describe('breadcrumbs', () => {
     let page: AppPage;
+    const login = "";
+    const password = "";
 
     beforeEach(() => {
         page = new AppPage();
     });
 
     // wejdz w model >> batteryType i name field jest capacity
-    it('see more should return correct model', () => {
+    it('see more should return correct model', () => {   
+        page.navigateToLocation('login');
+
+        element(by.id('email')).sendKeys(login);
+        element(by.id('password')).sendKeys(password);
+        element(by.cssContainingText('button', 'Zaloguj')).click();
+
         page.navigateToLocation('robotpanel-new/refreshtest');
 
         const EC = protractor.ExpectedConditions;
-        browser.wait(EC.presenceOf(element(by.cssContainingText('th', 'robotIp'))), 20 * 1000, 'Element taking too long to appear in the DOM');
+        const el = element(by.cssContainingText('th', 'robotIp'))
+        browser.wait(EC.presenceOf(el), 5 * 1000, 'Element taking too long to appear in the DOM');
         browser.waitForAngular();
+
+        expect(el.isPresent()).toBeTruthy();
 
         // element(by.cssContainingText('th', 'robotIp')).getText().then((text) => {
         //     console.log(text);
         // });
 
-        expect(
-            element.all(by.cssContainingText('th', 'robotIp')).count()
-        ).toBeGreaterThanOrEqual(1);
+        // expect(
+        //     element.all(by.cssContainingText('th', 'robotIp')).count()
+        // ).toBeGreaterThanOrEqual(1);
+        
     });
 
     // cofnij się do moduelu, jest field o nazwie maxVelocity
