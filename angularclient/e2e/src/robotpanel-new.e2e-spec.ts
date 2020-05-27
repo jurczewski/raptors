@@ -1,11 +1,17 @@
 import { AppPage } from './app.po';
 import { browser, by, element } from 'protractor';
 
-xdescribe('robot status', () => {
+describe('robot status', () => {
     let page: AppPage;
+    const login = "dispatchTest";
+    const password = "gBrZzVbCbMsr";
 
-    beforeEach(() => {
+    beforeEach(async () => {
         page = new AppPage();
+        const script = "sessionStorage.setItem('token', btoa('" + login + ":" + password + "'))";
+        await page.navigateToLocation('robotpanel-new/refreshtest');
+        await browser.executeScript(script);
+        await page.navigateToLocation('robotpanel-new/refreshtest');
     });
 
     it('check robot status table contents', () => {
@@ -40,10 +46,26 @@ xdescribe('robot status', () => {
         ).toEqual(1);
     });
 
-    it('should refresh robot status table', () => {
-        page.navigateToLocation('robotpanel-new/refreshtest');
+    it('should refresh robot status table', async () => {
+        await page.navigateToLocation('robotpanel-new/refreshtest');
+        
+        var pole = element(by.cssContainingText('td', '104, 76.4, 34.34'))
 
-        element(by.cssContainingText('button', 'refresh')).click();
+        expect(
+            element.all(by.cssContainingText('td', '104, 76.4, 34.34')).count()
+        ).toEqual(1);
+        expect(
+            pole.isPresent()
+        ).toBeTruthy;
+
+        await element(by.cssContainingText('button', 'refresh')).click();
+
+        expect(
+            element.all(by.cssContainingText('td', '104, 76.4, 34.34')).count()
+        ).toEqual(1);
+        expect(
+            pole.isPresent()
+        ).toBeTruthy;
     });
 });
 
