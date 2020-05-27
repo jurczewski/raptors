@@ -1,8 +1,5 @@
 import { AppPage } from './app.po';
 import { browser, by, element } from 'protractor';
-import { protractor } from 'protractor/built/ptor';
-import {HttpClient} from "@angular/common/http";
-
 
 xdescribe('robot status', () => {
     let page: AppPage;
@@ -64,25 +61,24 @@ describe('breadcrumbs', () => {
     });
 
     // wejdz w model >> batteryType i name field jest capacity
-    it('see more should return correct model', async () => {
-        // await page.navigateToLocation('login');
-        //
-        // await element(by.id('email')).sendKeys(login);
-        // await element(by.id('password')).sendKeys(password);
-        // await element(by.cssContainingText('button', 'Zaloguj')).click();
-        //
-        // browser.wait(() => {
-        //   browser.executeScript("return sessionStorage.getItem('token')").then(res => {
-        //     return res !== null;
-        //   });
-        // }, 20 * 1000, "chuj kurwa zesrało się");
-
+    it('*see more* should return correct model', async () => {
         await page.navigateToLocation('robotpanel-new/refreshtest');
 
-        expect(
-            element.all(by.cssContainingText('th', 'robotIp')).count()
-        ).toBeGreaterThanOrEqual(1);
+        const model = element(by.cssContainingText('th', 'model'));
+        expect(model.isPresent());
 
+        model.element(by.xpath('..')).element(by.cssContainingText('td', 'see more')).click();
+
+        const field = element(by.cssContainingText('th', 'maxLiftingCapacity'));
+        expect(field.isPresent());
+
+        const batteryType = element(by.cssContainingText('th', 'batteryType'));
+        expect(batteryType.isPresent());
+
+        batteryType.element(by.xpath('..')).element(by.cssContainingText('td', 'see more')).click();
+
+        const capacity = element(by.cssContainingText('th', 'capacity'));
+        expect(capacity.isPresent());
     });
 
     // cofnij się do moduelu, jest field o nazwie maxVelocity
