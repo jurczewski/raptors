@@ -1,8 +1,10 @@
 import { AppPage } from './app.po';
 import { browser, by, element } from 'protractor';
 import { protractor } from 'protractor/built/ptor';
+import {HttpClient} from "@angular/common/http";
 
-describe('robot status', () => {
+
+xdescribe('robot status', () => {
     let page: AppPage;
 
     beforeEach(() => {
@@ -50,29 +52,27 @@ describe('robot status', () => {
 
 describe('breadcrumbs', () => {
     let page: AppPage;
-    const login = "";
-    const password = "";
+    const login = "dispatchTest";
+    const password = "gBrZzVbCbMsr";
 
     beforeEach(() => {
         page = new AppPage();
     });
 
     // wejdz w model >> batteryType i name field jest capacity
-    it('see more should return correct model', () => {   
-        page.navigateToLocation('login');
+    it('see more should return correct model', async () => {
+        await page.navigateToLocation('login');
 
-        element(by.id('email')).sendKeys(login);
-        element(by.id('password')).sendKeys(password);
-        element(by.cssContainingText('button', 'Zaloguj')).click();
+        await element(by.id('email')).sendKeys(login);
+        await element(by.id('password')).sendKeys(password);
+        await element(by.cssContainingText('button', 'Zaloguj')).click();
 
-        page.navigateToLocation('robotpanel-new/refreshtest');
+        await page.navigateToLocation('robotpanel-new/refreshtest');
 
         const EC = protractor.ExpectedConditions;
-        const el = element(by.cssContainingText('th', 'robotIp'))
-        browser.wait(EC.presenceOf(el), 5 * 1000, 'Element taking too long to appear in the DOM');
-        browser.waitForAngular();
-
-        expect(el.isPresent()).toBeTruthy();
+        const selector = by.cssContainingText('h5', ' Robot ');
+        browser.wait(EC.presenceOf(element(selector)), 5 * 1000, 'Element taking too long to appear in the DOM');
+        await element(selector).click();
 
         // element(by.cssContainingText('th', 'robotIp')).getText().then((text) => {
         //     console.log(text);
@@ -81,7 +81,7 @@ describe('breadcrumbs', () => {
         // expect(
         //     element.all(by.cssContainingText('th', 'robotIp')).count()
         // ).toBeGreaterThanOrEqual(1);
-        
+
     });
 
     // cofnij się do moduelu, jest field o nazwie maxVelocity
