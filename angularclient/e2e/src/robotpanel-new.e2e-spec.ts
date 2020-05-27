@@ -55,32 +55,33 @@ describe('breadcrumbs', () => {
     const login = "dispatchTest";
     const password = "gBrZzVbCbMsr";
 
-    beforeEach(() => {
-        page = new AppPage();
+    beforeAll(async () => {
+      page = new AppPage();
+      const script = "sessionStorage.setItem('token', btoa('" + login + ":" + password + "'))";
+      await page.navigateToLocation('robotpanel-new/refreshtest');
+      await browser.executeScript(script);
+      await page.navigateToLocation('robotpanel-new/refreshtest');
     });
 
     // wejdz w model >> batteryType i name field jest capacity
     it('see more should return correct model', async () => {
-        await page.navigateToLocation('login');
-
-        await element(by.id('email')).sendKeys(login);
-        await element(by.id('password')).sendKeys(password);
-        await element(by.cssContainingText('button', 'Zaloguj')).click();
+        // await page.navigateToLocation('login');
+        //
+        // await element(by.id('email')).sendKeys(login);
+        // await element(by.id('password')).sendKeys(password);
+        // await element(by.cssContainingText('button', 'Zaloguj')).click();
+        //
+        // browser.wait(() => {
+        //   browser.executeScript("return sessionStorage.getItem('token')").then(res => {
+        //     return res !== null;
+        //   });
+        // }, 20 * 1000, "chuj kurwa zesrało się");
 
         await page.navigateToLocation('robotpanel-new/refreshtest');
 
-        const EC = protractor.ExpectedConditions;
-        const selector = by.cssContainingText('h5', ' Robot ');
-        browser.wait(EC.presenceOf(element(selector)), 5 * 1000, 'Element taking too long to appear in the DOM');
-        await element(selector).click();
-
-        // element(by.cssContainingText('th', 'robotIp')).getText().then((text) => {
-        //     console.log(text);
-        // });
-
-        // expect(
-        //     element.all(by.cssContainingText('th', 'robotIp')).count()
-        // ).toBeGreaterThanOrEqual(1);
+        expect(
+            element.all(by.cssContainingText('th', 'robotIp')).count()
+        ).toBeGreaterThanOrEqual(1);
 
     });
 
