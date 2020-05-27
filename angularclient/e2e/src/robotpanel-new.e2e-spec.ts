@@ -82,4 +82,20 @@ describe('breadcrumbs', () => {
     });
 
     // cofnij się do moduelu, jest field o nazwie maxVelocity
+    it('breadcrumbs should navigate you back', async () => {
+        await page.navigateToLocation('robotpanel-new/refreshtest');
+        const model = element(by.cssContainingText('th', 'model'));
+        model.element(by.xpath('..')).element(by.cssContainingText('td', 'see more')).click();
+        const batteryType = element(by.cssContainingText('th', 'batteryType'));
+        batteryType.element(by.xpath('..')).element(by.cssContainingText('td', 'see more')).click();
+        const capacity = element(by.cssContainingText('th', 'capacity'));
+        expect(capacity.isPresent()); //entered "root >> model >> batteryType"
+
+        const breadcrumbsModel = element(by.cssContainingText('span', 'model'));
+        expect(breadcrumbsModel.isPresent());
+        breadcrumbsModel.click(); //entered "root >> model
+
+        const turningRadius = element(by.cssContainingText('th', 'turningRadius'));
+        expect(turningRadius.isPresent());
+    });
 });
