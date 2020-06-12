@@ -16,6 +16,19 @@ export class RobotDetailsComponentNew implements OnInit {
 
   refresh() {
     this.refreshEvent.emit();
+    this.updateBatteryIcon();
+  }
+
+  private updateBatteryIcon() {
+    document.getElementById("batteryLevel").style.height = `${this.robot.batteryLevel}%`;
+
+    if (this.robot.batteryLevel < 15) {
+      document.getElementById("batteryLevel").className = 'battery-level error';
+    } else if (this.robot.batteryLevel < 30) {
+      document.getElementById("batteryLevel").className = 'battery-level warn';
+    } else {
+      document.getElementById("batteryLevel").className = 'battery-level';
+    }
   }
 
   constructor() { }
