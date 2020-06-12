@@ -1,4 +1,5 @@
 import {Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {timer} from 'rxjs';
 import {Robot} from "../../../model/Robots/Robot";
 import { Orientation } from 'src/app/model/Stand/Orientation';
 
@@ -17,6 +18,12 @@ export class RobotDetailsComponentNew implements OnInit {
 
   refresh() {
     this.refreshEvent.emit();
+  }
+
+  private refreshRepeater() {
+    timer(60000, 60000).subscribe(x => {
+      this.refreshEvent.emit();
+    })
   }
 
   orientationToString(orientation: Orientation) {
@@ -49,6 +56,7 @@ export class RobotDetailsComponentNew implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.refreshRepeater();
   }
 
 }
