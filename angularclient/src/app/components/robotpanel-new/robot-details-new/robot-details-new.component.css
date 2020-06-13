@@ -36,6 +36,12 @@ h1 {
   border-radius: 4px;
   position: relative;
   margin: 15px 0;
+
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
 
 .battery::before {

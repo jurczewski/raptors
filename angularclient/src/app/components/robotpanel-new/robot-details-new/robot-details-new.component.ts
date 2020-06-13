@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 import {Robot} from "../../../model/Robots/Robot";
 
 @Component({
@@ -6,7 +6,7 @@ import {Robot} from "../../../model/Robots/Robot";
   templateUrl: './robot-details-new.component.html',
   styleUrls: ['./robot-details-new.component.css']
 })
-export class RobotDetailsComponentNew implements OnInit {
+export class RobotDetailsComponentNew implements OnInit, OnChanges {
 
   @Input()
   robot: Robot;
@@ -34,6 +34,10 @@ export class RobotDetailsComponentNew implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(){
+    this.updateBatteryIcon();
   }
 
 }
