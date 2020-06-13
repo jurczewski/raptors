@@ -58,6 +58,7 @@ h1 {
   margin-right: var(--cssuiBreadcrumbsIndent);
   
   color: var(--cssuiBreadcrumbsTextColor);
+  cursor: pointer;
 }
 
 .breadcrumbs__item:after{
