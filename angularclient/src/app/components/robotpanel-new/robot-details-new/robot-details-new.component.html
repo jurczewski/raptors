@@ -13,6 +13,9 @@
       <ng-container *ngSwitchCase="typeEnum.BATTERY_LEVEL">
         <th scope="row">{{prop.getName()}}</th>
         <td>{{prop.toString()}}</td>
+        <div class="battery">
+          <div id="batteryLevel" class="battery-level" style="height:0%;"></div>
+        </div>
       </ng-container>
       <ng-container *ngSwitchDefault>
         <th scope="row">{{prop.getName()}}</th>
