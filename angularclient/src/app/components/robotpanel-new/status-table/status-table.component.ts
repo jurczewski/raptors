@@ -4,11 +4,11 @@ import {SpecialProperty} from "../../../model/GenericRobotModel/SpecialProperty/
 import {SpecialPropertyEnum} from "../../../model/GenericRobotModel/SpecialProperty/SpecialPropertyEnum";
 
 @Component({
-  selector: 'app-robot-details-new',
-  templateUrl: './robot-details-new.component.html',
-  styleUrls: ['./robot-details-new.component.css'],
+  selector: 'app-status-table',
+  templateUrl: './status-table.component.html',
+  styleUrls: ['./status-table.component.css'],
 })
-export class RobotDetailsComponentNew implements OnInit, AfterViewChecked {
+export class StatusTableComponent implements OnInit, AfterViewChecked {
 
   @Input()
   properties: Array<SpecialProperty>;
