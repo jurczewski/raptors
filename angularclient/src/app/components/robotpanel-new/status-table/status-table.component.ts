@@ -1,7 +1,7 @@
-import {AfterViewChecked, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {timer} from 'rxjs';
-import {SpecialProperty} from "../../../model/GenericRobotModel/SpecialProperty/SpecialProperty";
-import {SpecialPropertyEnum} from "../../../model/GenericRobotModel/SpecialProperty/SpecialPropertyEnum";
+import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { timer } from 'rxjs';
+import { SpecialProperty } from "../../../model/GenericRobotModel/SpecialProperty/SpecialProperty";
+import { SpecialPropertyEnum } from "../../../model/GenericRobotModel/SpecialProperty/SpecialPropertyEnum";
 
 @Component({
   selector: 'app-status-table',
@@ -22,7 +22,7 @@ export class StatusTableComponent implements OnInit, AfterViewChecked {
     this.refreshRepeater();
   }
 
-  ngAfterViewChecked(){
+  ngAfterViewChecked() {
     this.updateBatteryIcon();
   }
 
