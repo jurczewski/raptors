@@ -1,13 +1,4 @@
-import {
-  AfterViewChecked,
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output
-} from '@angular/core';
+import {AfterViewChecked, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {timer} from 'rxjs';
 import {SpecialProperty} from "../../../model/GenericRobotModel/SpecialProperty/SpecialProperty";
 import {SpecialPropertyEnum} from "../../../model/GenericRobotModel/SpecialProperty/SpecialPropertyEnum";
