@@ -25,3 +25,7 @@ h1 {
   font-style: italic;
   cursor: pointer;
 }
+
+.breadcrumb-header{
+  padding: 1rem 1rem 0rem 1rem;
+}
