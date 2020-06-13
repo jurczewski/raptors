@@ -1,16 +1,23 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
-import { timer } from 'rxjs';
-import {Robot} from "../../../model/Robots/Robot";
-import { Orientation } from 'src/app/model/Stand/Orientation';
+import {
+  AfterViewChecked,
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output
+} from '@angular/core';
+import {timer} from 'rxjs';
 import {SpecialProperty} from "../../../model/GenericRobotModel/SpecialProperty/SpecialProperty";
 import {SpecialPropertyEnum} from "../../../model/GenericRobotModel/SpecialProperty/SpecialPropertyEnum";
 
 @Component({
   selector: 'app-robot-details-new',
   templateUrl: './robot-details-new.component.html',
-  styleUrls: ['./robot-details-new.component.css']
+  styleUrls: ['./robot-details-new.component.css'],
 })
-export class RobotDetailsComponentNew implements OnInit, OnChanges {
+export class RobotDetailsComponentNew implements OnInit, AfterViewChecked {
 
   @Input()
   properties: Array<SpecialProperty>;
@@ -20,21 +27,17 @@ export class RobotDetailsComponentNew implements OnInit, OnChanges {
 
   typeEnum = SpecialPropertyEnum;
 
-  refresh() {
-    this.refreshEvent.emit();
+  ngOnInit() {
+    this.refreshRepeater();
+  }
+
+  ngAfterViewChecked(){
     this.updateBatteryIcon();
   }
 
-  private updateBatteryIcon() {
-    document.getElementById("batteryLevel").style.height = `${this.robot.batteryLevel}%`;
-
-    if (this.robot.batteryLevel < 15) {
-      document.getElementById("batteryLevel").className = 'battery-level error';
-    } else if (this.robot.batteryLevel < 30) {
-      document.getElementById("batteryLevel").className = 'battery-level warn';
-    } else {
-      document.getElementById("batteryLevel").className = 'battery-level';
-    }
+  refresh() {
+    this.refreshEvent.emit();
+    this.updateBatteryIcon();
   }
 
   private refreshRepeater() {
@@ -43,12 +46,26 @@ export class RobotDetailsComponentNew implements OnInit, OnChanges {
     })
   }
 
-  ngOnInit() {
-    this.refreshRepeater();
+  private updateBatteryIcon() {
+    const batteryElement = document.getElementById("batteryLevel");
+    if (batteryElement !== null && batteryElement !== undefined) {
+      const batteryLevel = this.getBatteryLevel();
+      batteryElement.style.height = `${batteryLevel}%`;
+      if (batteryLevel < 15) {
+        batteryElement.className = 'battery-level error';
+      } else if (batteryLevel < 30) {
+        batteryElement.className = 'battery-level warn';
+      } else {
+        batteryElement.className = 'battery-level';
+      }
+    }
   }
 
-  ngOnChanges(){
-    this.updateBatteryIcon();
+  private getBatteryLevel() {
+    if (this.properties !== null && this.properties !== undefined) {
+      return Number(this.properties.find(prop => prop.specialType === SpecialPropertyEnum.BATTERY_LEVEL).getValue());
+    } else {
+      return 0;
+    }
   }
-
 }
