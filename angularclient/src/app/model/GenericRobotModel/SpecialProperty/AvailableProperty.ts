@@ -10,7 +10,11 @@ export class AvailableProperty extends SpecialProperty {
   }
 
   toString(): string {
-    return this.getValue() === "true" ? "online" : "offline";
+    const value = this.getValue();
+    if(value === null || value === undefined || value === 'undefined'){
+      return "no data 🟠"
+    }
+    return value.toString().toLowerCase() === "true" ? "online 🟢" : "offline 🔴";
   }
 
   getName(): string {

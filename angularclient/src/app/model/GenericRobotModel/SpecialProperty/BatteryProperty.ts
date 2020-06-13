@@ -10,7 +10,7 @@ export class BatteryProperty extends SpecialProperty {
   }
 
   toString(): string {
-    return super.toString();
+    return super.toString() + "%";
   }
 
   getName(): string {

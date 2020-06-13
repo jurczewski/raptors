@@ -2,6 +2,8 @@ import {Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import {timer} from 'rxjs';
 import {Robot} from "../../../model/Robots/Robot";
 import { Orientation } from 'src/app/model/Stand/Orientation';
+import {SpecialProperty} from "../../../model/GenericRobotModel/SpecialProperty/SpecialProperty";
+import {SpecialPropertyEnum} from "../../../model/GenericRobotModel/SpecialProperty/SpecialPropertyEnum";
 
 @Component({
   selector: 'app-robot-details-new',
@@ -11,10 +13,12 @@ import { Orientation } from 'src/app/model/Stand/Orientation';
 export class RobotDetailsComponentNew implements OnInit {
 
   @Input()
-  robot: Robot;
+  properties: Array<SpecialProperty>;
 
   @Output("refreshEvent")
   refreshEvent: EventEmitter<any> = new EventEmitter();
+
+  typeEnum = SpecialPropertyEnum;
 
   refresh() {
     this.refreshEvent.emit();
@@ -25,35 +29,6 @@ export class RobotDetailsComponentNew implements OnInit {
       this.refreshEvent.emit();
     })
   }
-
-  orientationToString(orientation: Orientation) {
-    const o = this.quaternionToEuler(orientation);
-
-    return "yaw " + o[0].toFixed(2) + "° : pitch " + o[1].toFixed(2) + "° : roll " + o[2].toFixed(2) + "°";
-  }
-
-  private quaternionToEuler(quaternion: Orientation) {
-    var t0 = +2.0 * (quaternion.w * quaternion.x + quaternion.y * quaternion.z);
-    var t1 = +1.0 - 2.0 * (quaternion.x * quaternion.x + quaternion.y * quaternion.y);
-    const roll = this.radianToDegree(Math.atan2(t0, t1));
-
-    var t2 = +2.0 * (quaternion.x * quaternion.y - quaternion.z * quaternion.x);
-    t2 = t2 > +1.0 ? +1.0 : t2;
-    t2 = t2 < -1.0 ? -1.0 : t2;
-    const pitch = this.radianToDegree(Math.asin(t2));
-
-    var t3 = +2.0 * (quaternion.w * quaternion.z + quaternion.x * quaternion.y);
-    var t4 = +1.0 - 2.0 * (quaternion.y * quaternion.y + quaternion.z * quaternion.z);
-    const yaw = this.radianToDegree(Math.atan2(t3, t4));
-
-    return [yaw, pitch, roll];
-  }
-
-  private radianToDegree(radian: number) {
-    return radian * 57.2957795131;
-  }
-
-  constructor() { }
 
   ngOnInit() {
     this.refreshRepeater();

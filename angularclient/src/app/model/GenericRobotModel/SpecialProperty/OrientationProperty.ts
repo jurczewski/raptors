@@ -21,7 +21,7 @@ export class OrientationProperty extends SpecialProperty {
       return this.orientationToString(new Orientation(Number(x), Number(y), Number(z), Number(w)))
 
     } else {
-      return (this as Property).toString();
+      return super.toString();
     }
   }
 
