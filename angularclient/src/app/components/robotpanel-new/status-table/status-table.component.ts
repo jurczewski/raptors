@@ -32,7 +32,7 @@ export class StatusTableComponent implements OnInit, AfterViewChecked {
   }
 
   private refreshRepeater() {
-    timer(60000, 60000).subscribe(x => {
+    timer(5000, 5000).subscribe(x => {
       this.refreshEvent.emit();
     })
   }
