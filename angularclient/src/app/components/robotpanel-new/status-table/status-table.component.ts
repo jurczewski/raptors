@@ -2,6 +2,8 @@ import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output } from
 import { timer } from 'rxjs';
 import { SpecialProperty } from "../../../model/GenericRobotModel/SpecialProperty/SpecialProperty";
 import { SpecialPropertyEnum } from "../../../model/GenericRobotModel/SpecialProperty/SpecialPropertyEnum";
+import {environment} from "../../../../environments/environment"
+
 
 @Component({
   selector: 'app-status-table',
@@ -32,7 +34,7 @@ export class StatusTableComponent implements OnInit, AfterViewChecked {
   }
 
   private refreshRepeater() {
-    timer(5000, 5000).subscribe(x => {
+    timer(environment.refreshRate, environment.refreshRate).subscribe(x => {
       this.refreshEvent.emit();
     })
   }
