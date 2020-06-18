@@ -59,7 +59,7 @@ export class RobotPanelComponentNew implements OnInit {
 
   private getLogs() {
     this.logService.getLogsFromRobot(this.robot.id).subscribe(logs => {
-      this.logs = logs;
+      this.logs = logs.slice(-5);
     });
   }
 
